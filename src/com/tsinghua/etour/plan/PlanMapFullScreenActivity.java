@@ -50,7 +50,7 @@ public class PlanMapFullScreenActivity extends BaseActivity implements OnClickLi
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		int tag = (int) v.getTag();
+		int tag = Integer.parseInt((String)v.getTag());
 		switch (tag) {
 		case BACK_TO_LIST:
 			finish();

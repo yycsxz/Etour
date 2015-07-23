@@ -55,7 +55,7 @@ public class PreviewPlanActivity extends BaseActivity implements
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		int tag = (int) v.getTag();
+		int tag = Integer.parseInt((String)v.getTag());
 		switch (tag) {
 		case NEXT:
 			break;
