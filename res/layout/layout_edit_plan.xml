@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg" >
+    
+    <FrameLayout 
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+        <ImageView 
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/test"/>
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:text="@string/change_coordinate"
+            android:textColor="@color/white"
+            android:layout_gravity="bottom|right"/>
+    </FrameLayout>
+    
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+        <LinearLayout 
+            android:id="@+id/add_sub"
+            android:layout_width="120dp"
+            android:layout_alignParentRight="true"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <LinearLayout 
+            	android:layout_width="0dp"
+            	android:layout_weight="1"
+            	android:layout_height="match_parent"
+            	android:gravity="right"
+            	android:background="@color/bg">
+            	<ImageView 
+            	    android:layout_width="50dp"
+                	android:layout_height="50dp"
+                	android:src="@drawable/test"
+                	android:scaleType="centerCrop"/>
+        	</LinearLayout>
+        	<LinearLayout 
+            	android:layout_width="0dp"
+            	android:layout_weight="1"
+            	android:layout_height="match_parent"
+            	android:gravity="right"
+            	android:background="@color/bg">
+            	<ImageView 
+                	android:layout_width="50dp"
+                	android:layout_height="50dp"
+                	android:src="@drawable/test"
+                	android:scaleType="centerCrop"/>
+        	</LinearLayout>
+        </LinearLayout>
+        
+        <com.tsinghua.etour.view.HorizontalListView
+            android:id="@+id/horizontallistview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/add_sub"/>
+
+    </RelativeLayout>
+    
+    <include layout="@layout/common_white_line" ></include>
+    
+    <ListView 
+        android:id="@+id/edit_plan_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5">
+        
+    </ListView>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <ImageView
+        	android:layout_width="40dp"
+        	android:layout_height="40dp"
+        	android:layout_marginTop="10dp"
+        	android:scaleType="centerCrop"
+        	android:layout_gravity="center"
+        	android:src="@drawable/test">
+        </ImageView>
+        <RelativeLayout 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <Button 
+                android:id="@+id/add_remark"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
+                android:text="@string/add_remark"
+                android:textColor="@color/black"
+                android:textSize="@dimen/button_font"
+                android:background="@color/white"
+                android:layout_alignParentLeft="true"/>
+            <Button 
+                android:id="@+id/add_tag"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
+                android:text="@string/add_tag"
+                android:textColor="@color/black"
+                android:textSize="@dimen/button_font"
+                android:background="@color/white"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

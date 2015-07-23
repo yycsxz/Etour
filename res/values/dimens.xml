@@ -1,0 +1,24 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">10dp</dimen>
+    <dimen name="activity_vertical_margin">10dp</dimen>
+    
+    <!-- 创建计划 -->
+    <dimen name="create_plan_horizontal_margin">10dp</dimen>
+    
+    <dimen name="button_width">80dp</dimen>
+    <dimen name="button_height">30dp</dimen>
+    <dimen name="button_font">15sp</dimen>
+    
+    
+    <!-- TagDialog -->
+    <dimen name="tag_height">30dp</dimen>
+    <dimen name="tag_width">60dp</dimen>
+    <dimen name="tag_margin_left">10dp</dimen>
+    <dimen name="tag_font">15sp</dimen>
+    
+    <!-- RemarkDialog -->
+    <dimen name="remark_spacing">15dp</dimen>
+
+</resources>

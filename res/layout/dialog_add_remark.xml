@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal" >
+    <FrameLayout 
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/bg">
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_remark"
+            android:textColor="@color/white"
+            android:textSize="@dimen/tag_font"
+            android:layout_gravity="center"/>
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:text="@string/save"
+            android:textColor="@color/white"
+            android:textSize="@dimen/tag_font"
+            android:layout_gravity="right|center_vertical"/>
+    </FrameLayout>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+        <TextView 
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
+        <EditText 
+        	android:layout_width="match_parent"
+        	android:layout_height="40dp"
+        	android:layout_marginTop="@dimen/remark_spacing"
+        	android:background="@drawable/bg_edittext"/>  
+    	<ImageView
+        	android:layout_width="200dp"
+        	android:layout_height="100dp"
+        	android:layout_marginTop="@dimen/remark_spacing"
+        	android:layout_marginBottom="@dimen/remark_spacing"
+        	android:src="@drawable/test"
+        	android:scaleType="centerCrop"/>
+    </LinearLayout>
+
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:background="@color/bg"
+        android:gravity="center_horizontal">
+        <ImageView 
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/test"
+            android:scaleType="centerCrop"/>
+    </LinearLayout>
+
+
+</LinearLayout>

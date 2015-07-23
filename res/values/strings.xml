@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Etour</string>
+    <string name="action_settings">Settings</string>
+    
+    <!-- actionbar -->
+    <string name="cancel">取消</string>
+    <string name="back">返回</string>
+    <string name="next">下一步</string>  
+    
+    <!-- 创建计划 -->  
+    <string name="basic_infor">基本信息</string>
+    
+    <string name="plan_name">计划名称</string>
+    <string name="plan_time">计划天数</string>
+    <string name="start_position">出发地点</string>
+    <string name="start_time">出发时间</string>
+    <string name="plan_remarks">计划备注</string>
+
+    <!-- 编辑计划 -->
+    <string name="edit_plan">编辑计划</string>
+    
+    <string name="change_coordinate">编辑坐标</string>
+    <string name="add_remark">添加备注</string>
+    <string name="add_tag">添加标签</string>
+    
+    <string name="shang">上</string>
+    <string name="xia">下</string>
+    <string name="wu">午</string>
+    <string name="wan">晚</string>
+    
+    <!-- 预览计划 -->
+    <string name="preview">预览</string>
+    <string name="save">保存</string>
+    <string name="full_screen">全屏</string>
+    
+    <!-- 添加标签 -->
+    <string name="view">景点</string>
+    <string name="restaurant">餐厅</string>
+    <string name="hotel">酒店</string>
+    <string name="entertainment">娱乐</string>
+    <string name="shopping">购物</string>
+    <string name="other">其他</string>
+    
+    <!-- 地图全屏 -->
+    <string name="list">列表</string>
+    
+    <!-- 设置位置 -->
+    <string name="set_position">设置位置</string>
+    <string name="choose_current_position">使用当前位置</string>
+    <string name="create_new_position">创建新位置</string>
+    
+    <!-- init -->
+    <string name="position">北京市长安街1号天安门广场</string>
+    
+    <string name="test">测试</string>
+</resources>
