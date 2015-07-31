@@ -2,125 +2,155 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/bg" >
-    
-    <FrameLayout 
+    android:background="@color/bg"
+    android:orientation="vertical" >
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp">
-        <ImageView 
+        android:layout_height="150dp" >
+
+        <com.amap.api.maps.MapView
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/map"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/test"/>
-        <TextView 
+            android:scaleType="centerCrop" >
+        </com.amap.api.maps.MapView>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:text="@string/change_coordinate"
-            android:textColor="@color/white"
-            android:layout_gravity="bottom|right"/>
+            android:textColor="@color/white" />
     </FrameLayout>
-    
-    <RelativeLayout 
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="5dp"
         android:background="@color/white"
-        android:orientation="horizontal">
-        <LinearLayout 
+        android:orientation="horizontal" >
+
+        <LinearLayout
             android:id="@+id/add_sub"
             android:layout_width="120dp"
-            android:layout_alignParentRight="true"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
-            <LinearLayout 
-            	android:layout_width="0dp"
-            	android:layout_weight="1"
-            	android:layout_height="match_parent"
-            	android:gravity="right"
-            	android:background="@color/bg">
-            	<ImageView 
-            	    android:layout_width="50dp"
-                	android:layout_height="50dp"
-                	android:src="@drawable/test"
-                	android:scaleType="centerCrop"/>
-        	</LinearLayout>
-        	<LinearLayout 
-            	android:layout_width="0dp"
-            	android:layout_weight="1"
-            	android:layout_height="match_parent"
-            	android:gravity="right"
-            	android:background="@color/bg">
-            	<ImageView 
-                	android:layout_width="50dp"
-                	android:layout_height="50dp"
-                	android:src="@drawable/test"
-                	android:scaleType="centerCrop"/>
-        	</LinearLayout>
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/bg"
+                android:gravity="right" >
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/test" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/bg"
+                android:gravity="right" >
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/test" />
+            </LinearLayout>
         </LinearLayout>
-        
-        <com.tsinghua.etour.view.HorizontalListView
+
+        <HorizontalScrollView
             android:id="@+id/horizontallistview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_toLeftOf="@id/add_sub"/>
+            android:layout_toLeftOf="@id/add_sub"
+            android:scrollbars="none" >
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_margin="0dp"
+                android:background="@color/bg"
+                android:orientation="vertical" >
+
+                <com.tsinghua.etour.view.DraggableGridView
+                    android:id="@+id/grid"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:numColumns="auto_fit"
+                    android:stretchMode="spacingWidthUniform" >
+                </com.tsinghua.etour.view.DraggableGridView>
+            </LinearLayout>
+        </HorizontalScrollView>
     </RelativeLayout>
-    
-    <include layout="@layout/common_white_line" ></include>
-    
-    <ListView 
+
+    <include layout="@layout/common_white_line" >
+    </include>
+
+    <ListView
         android:id="@+id/edit_plan_list_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5">
-        
+        android:layout_weight="5" >
     </ListView>
-    
-    <LinearLayout 
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
         android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical" >
+
         <ImageView
-        	android:layout_width="40dp"
-        	android:layout_height="40dp"
-        	android:layout_marginTop="10dp"
-        	android:scaleType="centerCrop"
-        	android:layout_gravity="center"
-        	android:src="@drawable/test">
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/test" >
         </ImageView>
-        <RelativeLayout 
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-            <Button 
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <Button
                 android:id="@+id/add_remark"
                 android:layout_width="@dimen/button_width"
                 android:layout_height="@dimen/button_height"
+                android:layout_alignParentLeft="true"
+                android:background="@color/white"
                 android:text="@string/add_remark"
                 android:textColor="@color/black"
-                android:textSize="@dimen/button_font"
-                android:background="@color/white"
-                android:layout_alignParentLeft="true"/>
-            <Button 
+                android:textSize="@dimen/button_font" />
+
+            <Button
                 android:id="@+id/add_tag"
                 android:layout_width="@dimen/button_width"
                 android:layout_height="@dimen/button_height"
+                android:layout_alignParentRight="true"
+                android:background="@color/white"
                 android:text="@string/add_tag"
                 android:textColor="@color/black"
-                android:textSize="@dimen/button_font"
-                android:background="@color/white"
-                android:layout_alignParentRight="true"/>
+                android:textSize="@dimen/button_font" />
         </RelativeLayout>
     </LinearLayout>
 

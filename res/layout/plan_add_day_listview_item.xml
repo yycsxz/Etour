@@ -2,172 +2,222 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="10dp"
+    android:background="@color/bg"
     android:orientation="vertical"
-    android:background="@color/bg" >
-    <TextView 
+    android:paddingTop="10dp" >
+
+    <TextView
         android:id="@+id/day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@color/bg"
         android:text="@string/test"
-        android:textColor="@color/white"
-        android:background="@color/bg"/>
+        android:textColor="@color/white" />
 
-    <LinearLayout 
+    <LinearLayout
         android:id="@+id/morning"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical">
-        <LinearLayout 
+        android:orientation="vertical" >
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
-            <LinearLayout 
+            android:orientation="horizontal" >
+
+            <LinearLayout
                 android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:orientation="vertical">
-                <LinearLayout 
+                android:orientation="vertical" >
+
+                <LinearLayout
                     android:layout_width="40dp"
                     android:layout_height="30dp"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/shang"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/white" />
                 </LinearLayout>
-                <LinearLayout 
+
+                <LinearLayout
                     android:layout_width="40dp"
                     android:layout_height="30dp"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/wu"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/white" />
                 </LinearLayout>
             </LinearLayout>
-            <TextView 
+
+            <TextView
                 android:layout_width="1dp"
                 android:layout_height="60dp"
-                android:background="@color/white"/>
-            
-            
+                android:background="@color/white" />
+
+            <HorizontalScrollView
+                android:id="@+id/horizontallistview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="0dp"
+                    android:background="@color/bg"
+                    android:orientation="vertical" >
+
+                    <com.tsinghua.etour.view.DraggableGridView
+                        android:id="@+id/grid_morning"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:numColumns="auto_fit"
+                        android:stretchMode="spacingWidthUniform" >
+                    </com.tsinghua.etour.view.DraggableGridView>
+                </LinearLayout>
+            </HorizontalScrollView>
         </LinearLayout>
-        <TextView 
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/white"
-            android:layout_gravity="bottom"/>
+            android:layout_gravity="bottom"
+            android:background="@color/white" />
     </LinearLayout>
-    
-    <LinearLayout 
+
+    <LinearLayout
         android:id="@+id/afternoon"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical">
-        <LinearLayout 
+        android:orientation="vertical" >
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
-            <LinearLayout 
+            android:orientation="horizontal" >
+
+            <LinearLayout
                 android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:orientation="vertical">
-                <LinearLayout 
+                android:orientation="vertical" >
+
+                <LinearLayout
                     android:layout_width="40dp"
                     android:layout_height="30dp"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/xia"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/white" />
                 </LinearLayout>
-                <LinearLayout 
+
+                <LinearLayout
                     android:layout_width="40dp"
                     android:layout_height="30dp"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/wu"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/white" />
                 </LinearLayout>
             </LinearLayout>
-            <TextView 
+
+            <TextView
                 android:layout_width="1dp"
                 android:layout_height="60dp"
-                android:background="@color/white"/>
-            
-            
+                android:background="@color/white" />
+
+            <!--  -->
         </LinearLayout>
-        <TextView 
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/white"
-            android:layout_gravity="bottom"/>
+            android:layout_gravity="bottom"
+            android:background="@color/white" />
     </LinearLayout>
-    
-    <LinearLayout 
+
+    <LinearLayout
         android:id="@+id/evening"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical">
-        <LinearLayout 
+        android:orientation="vertical" >
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
-            <LinearLayout 
+            android:orientation="horizontal" >
+
+            <LinearLayout
                 android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:orientation="vertical">
-                <LinearLayout 
+                android:orientation="vertical" >
+
+                <LinearLayout
                     android:layout_width="40dp"
                     android:layout_height="30dp"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/wan"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/white" />
                 </LinearLayout>
-                <LinearLayout 
+
+                <LinearLayout
                     android:layout_width="40dp"
                     android:layout_height="30dp"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/shang"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/white" />
                 </LinearLayout>
             </LinearLayout>
-            <TextView 
+
+            <TextView
                 android:layout_width="1dp"
                 android:layout_height="60dp"
-                android:background="@color/white"/>
-            
-            
+                android:background="@color/white" />
+            <!--  -->
         </LinearLayout>
-        <TextView 
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/white"
-            android:layout_gravity="bottom"/>
+            android:layout_gravity="bottom"
+            android:background="@color/white" />
+
+        <!--  -->
+
     </LinearLayout>
+
 </LinearLayout>
