@@ -21,23 +21,34 @@ public class EditPlanListViewAdapter extends BaseAdapter {
 	
 	private ViewHolder mViewHolder;
 	private LayoutInflater mInflater;
+	
 	private ArrayList<Integer> imgMorning;
+	private ArrayList<Integer> imgAfternoon;
+	private ArrayList<Integer> imgEvening;
 	private int xmlView;
 	private int imgView;
+	
 	public GridViewAdapter adapterMorning;
+	public GridViewAdapter adapterAfternoon;
+	public GridViewAdapter adapterEvening;
+	
 	private Context context;
 
 	//test
-	private int arr[] = {1,2,3,4,5};
+	private int arr[] = {1};
 
-	public EditPlanListViewAdapter(Context context, ArrayList<Integer> imgMorning, int xmlView, int imgView){
+	public EditPlanListViewAdapter(Context context, ArrayList<Integer> imgMorning, ArrayList<Integer> imgAfternoon, ArrayList<Integer> imgEvening, int xmlView, int imgView){
 		this.context = context;
 		mInflater = LayoutInflater.from(context);
 		this.imgMorning = new ArrayList<Integer>(imgMorning);
+		this.imgAfternoon = new ArrayList<Integer>(imgAfternoon);
+		this.imgEvening = new ArrayList<Integer>(imgEvening);
 		this.xmlView = xmlView;
 		this.imgView =imgView;
+		//³õÊ¼»¯£¬context, Í¼Æ¬Êý×é£¬ itemview id£¬ imageview id
 		adapterMorning = new GridViewAdapter(context, imgMorning,xmlView, imgView);
-
+		adapterAfternoon = new GridViewAdapter(context, imgAfternoon,xmlView, imgView);
+		adapterEvening = new GridViewAdapter(context, imgEvening,xmlView, imgView);
 	}
 
 	@Override
@@ -69,17 +80,23 @@ public class EditPlanListViewAdapter extends BaseAdapter {
 			convertView = mInflater.inflate(R.layout.plan_add_day_listview_item, null);
 			mViewHolder.day = (TextView) convertView.findViewById(R.id.day);
 			mViewHolder.morning = (DraggableGridView) convertView.findViewById(R.id.grid_morning);
+		    mViewHolder.afternoon = (DraggableGridView) convertView.findViewById(R.id.grid_afternoon);
+			mViewHolder.evening = (DraggableGridView) convertView.findViewById(R.id.grid_evening);
 			convertView.setTag(mViewHolder);
 		}else {
 			mViewHolder = (ViewHolder) convertView.getTag();
 		}
 		mViewHolder.day.setText("Day" + arr[position]);
+		//Ç¶Ì×gridview adapter
 		setGridView(mViewHolder.morning, adapterMorning);
+		setGridView(mViewHolder.afternoon, adapterAfternoon);
+		setGridView(mViewHolder.evening, adapterEvening);
+		
 		return convertView;
 	}
 
 	private void setGridView(DraggableGridView mygridView, final GridViewAdapter adapter) {
-		int size = imgMorning.size();
+		int size = adapter.imgList.size();
 		int length = 50;
 		DisplayMetrics dm = context.getResources().getDisplayMetrics();
 		float density = dm.density;
@@ -102,32 +119,33 @@ public class EditPlanListViewAdapter extends BaseAdapter {
 		mygridView.setOnChangeListener(new OnChangeListener() {
 
 			@Override
-			public void onChange(int from, int to, int type) {
+			public void onChange(int from, int to, int type, int x, int y) {
 				Log.i("from", Integer.toString(from));
 				Log.i("to", Integer.toString(to));
-				Log.i("p1", Integer.toString(imgMorning.get(0)));
-				Log.i("p2", Integer.toString(imgMorning.get(1)));
-				if(from>=0 && from<imgMorning.size() && to>=0 && to<imgMorning.size()){
+				if(adapter.imgList.get(0)!= null)
+				Log.i("p1", Integer.toString(adapter.imgList.get(0)));
+				if(adapter.imgList.get(0)!= null)
+				Log.i("p2", Integer.toString(adapter.imgList.get(1)));
+				if(from>=0 && from<adapter.imgList.size() && to>=0 && to<adapter.imgList.size()){
 					
 					if(type == 1){
 						if(from > to){
-							int temp = imgMorning.get(from);
-							imgMorning.remove(from);
-							imgMorning.add(to, temp);
+							int temp = adapter.imgList.get(from);
+							adapter.imgList.remove(from);
+							adapter.imgList.add(to, temp);
 						}else{
-							imgMorning.add(to+1, imgMorning.get(from));
-							imgMorning.remove(from);
+							adapter.imgList.add(to+1, adapter.imgList.get(from));
+							adapter.imgList.remove(from);
 						}
 						adapter.notifyDataSetChanged();
-						Log.i("p1", Integer.toString(imgMorning.get(0)));
-						Log.i("p2", Integer.toString(imgMorning.get(1)));
+						Log.i("p1", Integer.toString(adapter.imgList.get(0)));
+						Log.i("p2", Integer.toString(adapter.imgList.get(1)));
 						//this.notifyDataSetChanged();
 					}else{
-						if(from >= 0 && from <imgMorning.size()){
-							int temp = imgMorning.get(from);
-							imgMorning.remove(from);
+						if(from >= 0 && from <adapter.imgList.size()){
+							int temp = adapter.imgList.get(from);
+							adapter.imgList.remove(from);
 							adapter.notifyDataSetChanged();
-							//Hori.updateViewLayout(gridView, null);
 							Log.i("changed",Integer.toString(temp));
 						}
 					}
@@ -136,10 +154,12 @@ public class EditPlanListViewAdapter extends BaseAdapter {
 		});
 
 	}
-
+	//ÊÓÍ¼»º´æ
 	private static class ViewHolder {
 		private TextView day;
 		private DraggableGridView morning;
+		private DraggableGridView afternoon;
+		private DraggableGridView evening;
 	}
 
 }

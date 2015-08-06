@@ -12,7 +12,7 @@ import android.widget.ImageView;
 public class GridViewAdapter extends BaseAdapter{
 
 	private Context context;
-	private ArrayList<Integer> imgList = new ArrayList<Integer>();
+	public ArrayList<Integer> imgList = new ArrayList<Integer>();
 	private int xmlView;
 	private int imgView;
 

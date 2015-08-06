@@ -68,7 +68,7 @@ public final class R {
     public static final class id {
         public static final int ItemImage=0x7f09001c;
         public static final int ItemImageMorning=0x7f09001d;
-        public static final int action_settings=0x7f090024;
+        public static final int action_settings=0x7f090028;
         public static final int add_remark=0x7f090012;
         public static final int add_sub=0x7f09000e;
         public static final int add_tag=0x7f090013;
@@ -80,13 +80,17 @@ public final class R {
         public static final int day=0x7f090009;
         public static final int edit_plan_list_view=0x7f090011;
         public static final int entertainment=0x7f090006;
-        public static final int evening=0x7f090021;
+        public static final int evening=0x7f090023;
         public static final int full_screen=0x7f090016;
         public static final int grid=0x7f090010;
+        public static final int grid_afternoon=0x7f090022;
+        public static final int grid_evening=0x7f090025;
         public static final int grid_morning=0x7f09001f;
-        public static final int history_position=0x7f090022;
+        public static final int history_position=0x7f090026;
         public static final int history_position_list=0x7f09001a;
         public static final int horizontallistview=0x7f09000f;
+        public static final int horizontallistview2=0x7f090021;
+        public static final int horizontallistview3=0x7f090024;
         public static final int hotel=0x7f090005;
         public static final int itemlayout=0x7f09001b;
         public static final int iv_pic=0x7f09000b;
@@ -96,7 +100,7 @@ public final class R {
         public static final int morning=0x7f09001e;
         public static final int next=0x7f090002;
         public static final int other=0x7f090008;
-        public static final int position=0x7f090023;
+        public static final int position=0x7f090027;
         public static final int preview_plan_list_view=0x7f090017;
         public static final int restaurant=0x7f090004;
         public static final int rl=0x7f09000a;

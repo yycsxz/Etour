@@ -149,6 +149,29 @@
                 android:background="@color/white" />
 
             <!--  -->
+              <HorizontalScrollView
+                android:id="@+id/horizontallistview2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="0dp"
+                    android:background="@color/bg"
+                    android:orientation="vertical" >
+
+                    <com.tsinghua.etour.view.DraggableGridView
+                        android:id="@+id/grid_afternoon"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:numColumns="auto_fit"
+                        android:stretchMode="spacingWidthUniform" >
+                    </com.tsinghua.etour.view.DraggableGridView>
+                </LinearLayout>
+            </HorizontalScrollView>
         </LinearLayout>
 
         <TextView
@@ -208,6 +231,29 @@
                 android:layout_height="60dp"
                 android:background="@color/white" />
             <!--  -->
+              <HorizontalScrollView
+                android:id="@+id/horizontallistview3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="0dp"
+                    android:background="@color/bg"
+                    android:orientation="vertical" >
+
+                    <com.tsinghua.etour.view.DraggableGridView
+                        android:id="@+id/grid_evening"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:numColumns="auto_fit"
+                        android:stretchMode="spacingWidthUniform" >
+                    </com.tsinghua.etour.view.DraggableGridView>
+                </LinearLayout>
+            </HorizontalScrollView>
         </LinearLayout>
 
         <TextView

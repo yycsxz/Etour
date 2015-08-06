@@ -1,7 +1,6 @@
 package com.tsinghua.etour.plan;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import android.content.Intent;
 import android.location.Location;
@@ -14,7 +13,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -37,55 +35,56 @@ import com.tsinghua.etour.adapter.EditPlanHorizontalListViewAdapter;
 import com.tsinghua.etour.adapter.EditPlanListViewAdapter;
 import com.tsinghua.etour.adapter.GridViewAdapter;
 import com.tsinghua.etour.base.BaseActivity;
+import com.tsinghua.etour.staticc.DragImage;
 import com.tsinghua.etour.view.DraggableGridView;
 import com.tsinghua.etour.view.DraggableGridView.OnChangeListener;
 
 public class EditPlanActivity extends BaseActivity implements OnClickListener,
-		OnGestureListener, LocationSource, OnMarkerDragListener, OnMapLoadedListener, OnMarkerClickListener, AMapLocationListener {
+OnGestureListener, LocationSource, OnMarkerDragListener, OnMapLoadedListener, OnMarkerClickListener, AMapLocationListener {
 	private static final int NEXT = 1;
 	private static final int ADD_REMARK = 2;
 	private static final int ADD_TAG = 3;
-	
-	
+
+
 	private Button addRemark;
 	private Button addTag;
-	
+
 	//private HorizontalListView horizontalListView;
 	private EditPlanHorizontalListViewAdapter mAdapter;
-	
+
 	private ListView listView;
 	private EditPlanListViewAdapter planAddDayListViewAdapter;
-	
+
 	//draggable
 	private DraggableGridView gridView;
 	private ArrayList<Integer> imgList = new ArrayList<Integer>();
 	private GridViewAdapter adapter;
-	private DraggableGridView gridMorning;
+
 	private ArrayList<Integer> imgMorning = new ArrayList<Integer>();
-	private GridViewAdapter adapterMorning;
-	
-	
+	private ArrayList<Integer> imgAfternoon = new ArrayList<Integer>();
+	private ArrayList<Integer> imgEvening = new ArrayList<Integer>();
+
+
 	//map
 	private MapView mapView;
 	private AMap aMap;
 	private MarkerOptions markerOption;
 	private OnLocationChangedListener mListener;
 	private LocationManagerProxy mAMapLocationManager;
-	
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		initActionBar();	
 		setContentView(R.layout.layout_edit_plan);
-		
+
 		//map
 		mapView = (MapView) findViewById(R.id.map);
 		mapView.onCreate(arg0);// 此方法必须重写
 		addData();
 		initView();
-		
-		
+
 	}
 	private void addData(){
 		imgList.add(R.drawable.p1);
@@ -98,7 +97,10 @@ public class EditPlanActivity extends BaseActivity implements OnClickListener,
 		imgList.add(R.drawable.p8);
 		imgMorning.add(R.drawable.p1);
 		imgMorning.add(R.drawable.p2);
-		imgMorning.add(R.drawable.p3);
+		imgAfternoon.add(R.drawable.p3);
+		imgEvening.add(R.drawable.p5);
+		DragImage.setList(imgList);
+		DragImage.setMorning(imgMorning);
 	}
 	private void initView()
 	{
@@ -114,9 +116,11 @@ public class EditPlanActivity extends BaseActivity implements OnClickListener,
 		addRemark.setTag(ADD_REMARK);
 		addTag.setOnClickListener(this);
 		addTag.setTag(ADD_TAG);
-		
+
 		listView = (ListView) findViewById(R.id.edit_plan_list_view);
-		planAddDayListViewAdapter = new EditPlanListViewAdapter(this, imgMorning, R.layout.list_item,R.id.ItemImage);
+
+
+		planAddDayListViewAdapter = new EditPlanListViewAdapter(this, imgMorning, imgAfternoon, imgEvening, R.layout.list_item,R.id.ItemImage);
 		planAddDayListViewAdapter.notifyDataSetChanged();
 		listView.setAdapter(planAddDayListViewAdapter);
 		setGridView(imgList, gridView, adapter);
@@ -126,19 +130,19 @@ public class EditPlanActivity extends BaseActivity implements OnClickListener,
 			public boolean onTouch(View arg, MotionEvent ev) {
 				// TODO Auto-generated method stub
 				switch(ev.getAction()){
-					case MotionEvent.ACTION_DOWN:
-						break;
-					case MotionEvent.ACTION_MOVE:
-						planAddDayListViewAdapter.notifyDataSetChanged();
-						break;
-					case MotionEvent.ACTION_UP:
-						planAddDayListViewAdapter.notifyDataSetChanged();
+				case MotionEvent.ACTION_DOWN:
+					break;
+				case MotionEvent.ACTION_MOVE:
+					planAddDayListViewAdapter.notifyDataSetChanged();
+					break;
+				case MotionEvent.ACTION_UP:
+					planAddDayListViewAdapter.notifyDataSetChanged();
 				}
-					
+
 				return false;
 			}
-        });
-	//	setGridView(imgMorning, olanAddDayListViewAdapter.a);
+		});
+		//	setGridView(imgMorning, olanAddDayListViewAdapter.a);
 		//gridMorning.setAdapter(adapterMorning);
 		//setGridView(imgMorning, gridMorning, adapterMorning);
 		//map
@@ -158,17 +162,21 @@ public class EditPlanActivity extends BaseActivity implements OnClickListener,
 				startActivity(new Intent(EditPlanActivity.this,SetPositionActivity.class));
 			}
 		});
-		
+
 		mAdapter = new EditPlanHorizontalListViewAdapter(this);
 		mAdapter.notifyDataSetChanged();
 		horizontalListView.setAdapter(mAdapter);
-		*/
-		
-		
+		 */
+
+
 	}
 	private void setGridView(final ArrayList<Integer> imgList, DraggableGridView mygridView, final GridViewAdapter adapter) {
 		int size = imgList.size();
 		int length = 50;
+		int h = listView.getHeight();
+		int y = (int) listView.getY();
+		Log.i("listview h", Integer.toString(h));
+		Log.i("listview y", Integer.toString(y));
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		float density = dm.density;
@@ -179,19 +187,19 @@ public class EditPlanActivity extends BaseActivity implements OnClickListener,
 				gridviewWidth, itemWidth);
 		Log.i("params.width",Integer.toString(params.width));
 		Log.i("params.height",Integer.toString(params.height));
-		
+
 		mygridView.setLayoutParams(params); // 设置GirdView布局参数,横向布局的关键
 		mygridView.setColumnWidth(itemWidth); // 设置列表项宽
 		mygridView.setHorizontalSpacing(5); // 设置列表项水平间距
 		mygridView.setStretchMode(GridView.NO_STRETCH);
 		mygridView.setNumColumns(size); // 设置列数量=列表集合数
-		
+
 		mygridView.setAdapter(adapter);
 
 		mygridView.setOnChangeListener(new OnChangeListener() {
 
 			@Override
-			public void onChange(int from, int to, int type) {
+			public void onChange(int from, int to, int type, int x ,int y) {
 				Log.i("from", Integer.toString(from));
 				Log.i("to", Integer.toString(to));
 				if(type == 1){
@@ -209,6 +217,13 @@ public class EditPlanActivity extends BaseActivity implements OnClickListener,
 						int temp = imgList.get(from);
 						imgList.remove(from);
 						adapter.notifyDataSetChanged();
+						if(y > 1050 && y <= 1200)
+							planAddDayListViewAdapter.adapterMorning.imgList.add(temp);
+						else if(y > 1200 && y <= 1350)
+							planAddDayListViewAdapter.adapterAfternoon.imgList.add(temp);
+						else if(y > 1350 && y <= 1500)
+							planAddDayListViewAdapter.adapterEvening.imgList.add(temp);
+						planAddDayListViewAdapter.notifyDataSetChanged();
 						//Hori.updateViewLayout(gridView, null);
 						Log.i("changed",Integer.toString(temp));
 					}
@@ -229,7 +244,7 @@ public class EditPlanActivity extends BaseActivity implements OnClickListener,
 		aMap.setOnMarkerClickListener(this);// 设置点击marker事件监听器
 		//addMarkersToMap();
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -267,7 +282,7 @@ public class EditPlanActivity extends BaseActivity implements OnClickListener,
 		nextButton.setOnClickListener(this);
 		nextButton.setTag(NEXT);
 	}
-	
+
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -286,18 +301,18 @@ public class EditPlanActivity extends BaseActivity implements OnClickListener,
 			break;
 		}
 	}
-	
+
 	private void addTag(){
 		PlanAddTagDialog addTagDialog = new PlanAddTagDialog();
 		addTagDialog.show(getFragmentManager(), "AddTagDialog");
 	}
-	
+
 	private void addRemark(){
 		PlanAddRemarkDialog addRemarkDialog = new PlanAddRemarkDialog();
 		addRemarkDialog.show(getFragmentManager(), "AddRemarkDialog");
 	}
 
-	
+
 	@Override
 	public boolean onDown(MotionEvent e) {
 		// TODO Auto-generated method stub
@@ -365,44 +380,44 @@ public class EditPlanActivity extends BaseActivity implements OnClickListener,
 	@Override
 	public void onMarkerDrag(Marker arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onMarkerDragEnd(Marker arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onMarkerDragStart(Marker arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onLocationChanged(Location arg0) {
 		// TODO Auto-generated method stub
-		
-		
+
+
 	}
 
 	@Override
 	public void onProviderDisabled(String arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onProviderEnabled(String arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -424,8 +439,8 @@ public class EditPlanActivity extends BaseActivity implements OnClickListener,
 	@Override
 	public void onMapLoaded() {
 		// TODO Auto-generated method stub
-		
-		
+
+
 	}
 
 }

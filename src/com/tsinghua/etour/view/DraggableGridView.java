@@ -3,8 +3,12 @@ package com.tsinghua.etour.view;
 
 import java.util.Calendar;
 
+import com.tsinghua.etour.R;
+import com.tsinghua.etour.staticc.DragImage;
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
@@ -16,6 +20,7 @@ import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -69,6 +74,7 @@ public class DraggableGridView extends GridView {
 	private int mOffset2Left;  
 
 	private OnChangeListener onChangeListener; 
+	
 	/**
 	 * DragGridView自动向下滚动的边界值
 	 */
@@ -78,6 +84,7 @@ public class DraggableGridView extends GridView {
 	 * DragGridView自动向上滚动的边界值
 	 */
 	private int mUpScrollBorder;
+	private Resources res;
 
 	/*
 	public void setLayoutParams(LayoutParams params){
@@ -86,6 +93,7 @@ public class DraggableGridView extends GridView {
 	 */
 	public DraggableGridView(Context context) {
 		this(context, null);
+		res = context.getResources();
 	}
 
 	public DraggableGridView(Context context, AttributeSet attrs) {
@@ -215,10 +223,19 @@ public class DraggableGridView extends GridView {
 		case MotionEvent.ACTION_UP: 
 			int upX = (int)ev.getX();  
 			int upY = (int)ev.getY();
+			int x = (int)ev.getRawX();
+			int y =  (int)ev.getRawY();
+			Log.i("yyyyyyyyyy", Integer.toString(y));
+			Log.i("xxxxxxxxxx", Integer.toString(x));
 			if(isDrag == true){ 
 				onStopDrag(); 
-				if(upY > 3*mPoint2ItemTop)
-					onDeleteItem(); 
+				if(upY > 3*mPoint2ItemTop){
+					onDeleteItem(x, y); 
+					int tempPosition = pointToPosition(upX, upY);
+					//View v = ((ViewGroup) res.getLayout(R.layout.plan_add_day_listview_item)).getChildAt(tempPosition);
+					//View v = getChildAt(tempPosition - getFirstVisiblePosition());
+					//if(v != null)Log.i("v", String.valueOf(v.getId()));	
+				}
 				isDrag = false;
 			}
 			break;  
@@ -235,19 +252,27 @@ public class DraggableGridView extends GridView {
 		if(tempPosition != mDragPosition && tempPosition != AdapterView.INVALID_POSITION){
 			getChildAt(tempPosition - getFirstVisiblePosition()).setVisibility(View.INVISIBLE);//拖动到了新的item,新的item隐藏掉
 			getChildAt(mDragPosition - getFirstVisiblePosition()).setVisibility(View.VISIBLE);//之前的item显示出来
-			
+			View v = getChildAt(tempPosition - getFirstVisiblePosition());
+			Log.i("v", String.valueOf(v.getId()));
 			if(onChangeListener != null){
-				onChangeListener.onChange(mDragPosition, tempPosition, 1);
+				onChangeListener.onChange(mDragPosition, tempPosition, 1, moveX, moveY);
 			}
 			
 			mDragPosition = tempPosition;
 		}
 		
 	}
+	/** 对边界做一定处理，免得越出界面
+	 *  
+	 * @param moveX 
+	 * @param moveY 
+	 */  
+	
+	
 	private void onDragItem(int moveX, int moveY){  
 		if(moveX< mPoint2ItemLeft) moveX = mPoint2ItemLeft;
 		if(moveY< mPoint2ItemTop) moveY = mPoint2ItemTop;
-		if(moveX > getWidth()-mPoint2ItemLeft) moveX = getWidth()-mPoint2ItemLeft;
+		if(moveX > getWidth()) moveX = getWidth();
 		mWindowLayoutParams.x = moveX - mPoint2ItemLeft + mOffset2Left;  
 		mWindowLayoutParams.y = moveY - mPoint2ItemTop + mOffset2Top - mStatusHeight; 
 		mWindowManager.updateViewLayout(mDragImageView, mWindowLayoutParams); //更新镜像的位置   
@@ -259,9 +284,10 @@ public class DraggableGridView extends GridView {
 	 * @param moveX 
 	 * @param moveY 
 	 */  
-	private void onDeleteItem(){  
+	private void onDeleteItem(int x, int y){  
 		if(onChangeListener != null){  
-			onChangeListener.onChange(mDragPosition,0,0);  
+			DragImage.getMorning().add(DragImage.getList().get(mDragPosition));
+			onChangeListener.onChange(mDragPosition,0,0,x,y);  
 		}  
 	}  
 	/** 
@@ -285,6 +311,7 @@ public class DraggableGridView extends GridView {
 	}  
 
 	private static int getStatusHeight(Context context){
+		
 		int statusHeight = 0;
 		Rect localRect = new Rect();
 		((Activity) context).getWindow().getDecorView().getWindowVisibleDisplayFrame(localRect);
@@ -304,14 +331,16 @@ public class DraggableGridView extends GridView {
 	}
 
 	public interface OnChangeListener{  
-
-		public void onChange(int from, int to, int type);  
-
+		public void onChange(int from, int to, int type, int x, int y);  
 	}
 
 	public void setOnChangeListener(OnChangeListener onChangeListener) {
 		// TODO Auto-generated method stub
 		this.onChangeListener = onChangeListener; 
+	}
+	public interface onAction{
+		public void onDown(int DownX, int DownY);
+		
 	}
 
 }
